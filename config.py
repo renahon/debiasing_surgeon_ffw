@@ -66,7 +66,7 @@ def init_config():
     parser.add_argument("--dev", default="cuda:0") 
     parser.add_argument("--momentum-sgd", type=float, default=0.9)
     parser.add_argument("--seed", type=int, default=0) 
-    parser.add_argument("--datapath", default="./data/")
+    parser.add_argument("--datapath", default="../debiasing_surgeon/data/")
     parser.add_argument("--dataset", default="cifar10c")
     parser.add_argument("--cifar10c_percent", default="0.5")
     parser.add_argument("--load_model", default=1, type=int)
@@ -78,6 +78,7 @@ def init_config():
     parser.add_argument("--max_gate_epochs", default=200, type=int)
     parser.add_argument("--gate_patience", default=5, type=int)
     parser.add_argument("--stopping_criterion", default="min_temperature")
+    parser.add_argument("--ver", default="work")
     args = parser.parse_args()
     if args.dataset == "MultiColorMNIST":
         args.nb_bias = 2
