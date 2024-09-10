@@ -6,7 +6,6 @@
 # ==========================================================================
 
 
-
 import torch
 import os
 
@@ -24,23 +23,27 @@ def get_dataset_info(args):
 
 
 def get_model_folder(args):
-    path = (os.path.join(args.datapath, args.ver))
+    path = os.path.join(args.datapath, args.ver)
     if not os.path.exists(path):
         os.mkdir(path)
     full_path = os.path.join(
         path,
-        "{0}_{1}_alpha{4}_gamma{5}_seed{6}".format(
+        "v{0}_{1}_{2}_alpha{3}_gamma{4}_seed{5}".format(
+            args.ver,
             args.dataset,
             get_dataset_info(args),
             args.alpha,
             args.gamma,
-            args.seed,))
+            args.seed,
+        ),
+    )
     if not os.path.exists(full_path):
         os.mkdir(full_path)
     return full_path
 
+
 def get_wandb_name(args):
-    wandb_name = "run_{0}_{1}_{2}_{3}_alpha{4}_gamma{5}_seed{6}".format(
+    wandb_name = "run_v{0}_{1}_{2}_alpha{3}_gamma{4}_seed{5}".format(
         args.ver,
         args.dataset,
         get_dataset_info(args),
@@ -59,7 +62,7 @@ def get_model_name(args, epoch=None, biased=True):
     else:
         model_type = "PRUNED"
     model_name = "epoch{0}_{1}.pth".format(epoch, model_type)
-    return os.path.join(get_model_folder(args),model_name)
+    return os.path.join(get_model_folder(args), model_name)
 
 
 def save_biased_model(model, args, epoch=None):
@@ -70,8 +73,6 @@ def get_path_to_gating_weights(args):
     return os.path.join(get_model_folder(args), "gating_weights")
 
 
-
-
 def get_PH_file_name(args):
     PH_path = os.path.join(get_model_folder(args), "classifierPH")
     return [f"{PH_path}{i}.pt" for i in range(args.nb_bias)]
@@ -80,4 +81,3 @@ def get_PH_file_name(args):
 def save_PH_classifier(args):
     for i in range(args.nb_bias):
         torch.save(args.PH[i].classifier, get_PH_file_name(args)[i])
-

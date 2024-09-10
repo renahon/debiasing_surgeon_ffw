@@ -38,7 +38,7 @@ class CorruptedCIFAR10(Dataset):
             self.data = glob(os.path.join(root, '../test',"*","*"))
 
     def download_dataset(self, path):
-        url = "https://drive.google.com/file/d/1_eSQ33m2-okaMWfubO7b8hhvLMlYNJP-/view?usp=sharing"
+        url = "https://drive.google.com/file/d/1_eSQ33m2-okaMWfubO7b8hhvLMlYNJP-"
         output = os.path.join(path, 'cifar10c.tar.gz')
         print(f'=> Downloading corrupted CIFAR10 dataset from {url}')
         gdown.download(url, output, quiet=False)
