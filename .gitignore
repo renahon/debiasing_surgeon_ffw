@@ -163,3 +163,4 @@ wandb/**
 *.DCM
 *.JPEG
 *.jpeg
+ffw/*

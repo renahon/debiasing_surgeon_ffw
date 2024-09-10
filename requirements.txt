@@ -1,8 +1,8 @@
 gdown==3.13.0
-numpy==1.23.5
+numpy
 pandas==1.2.4
 Pillow==10.4.0
 torch==1.13.0
 torchvision==0.14.0
 tqdm==4.56.0
-wandb==0.15.4
+wandb
