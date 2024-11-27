@@ -44,13 +44,7 @@ def init_config():
         metavar="N",
         help="number of epochs to train (default: 80)",
     ) 
-    parser.add_argument(
-        "--lr",
-        type=float,
-        default=0.1,
-        metavar="LR",
-        help="learning rate (default: 0.1)",
-    )
+    parser.add_argument("--lr",type=float,default=0.1,metavar="LR")
     parser.add_argument(
         "--lr_priv",
         type=float,
