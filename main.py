@@ -79,27 +79,27 @@ else:
 
     save_biased_model(model, args)
 
-# model_aux = copy.deepcopy(model)
-# model_aux = model_aux.to(args.device)
-# print("Initializing Privacy Head")
-# init_PH(args, model_aux, dls, load_PH)
-
-# path_to_gating_weights = get_path_to_gating_weights(args)
-# if load_gating_weights and os.path.exists(path_to_gating_weights):
-#     with open(
-#         path_to_gating_weights,"rb",
-#     ) as file:
-#         gating_weights = pickle.load(file)
-# else:
-#     gating_weights, best_intermediate_gating_weights = (
-#         train_gating_weights_based_on_MI_double(
-#             model,args,dls,
-#             temp_sched_patience=args.gate_patience,))
-
-
-# prune_and_evaluate_model(model, gating_weights,
-#                          args, model_type="Final pruned model", dls=dls)
-
-# if best_intermediate_gating_weights is not None:
-#     prune_and_evaluate_model(model, best_intermediate_gating_weights,
-#                              args, model_type="Best pruned model", dls=dls)
+model_aux = copy.deepcopy(model)
+model_aux = model_aux.to(args.device)
+print("Initializing Privacy Head")
+init_PH(args, model_aux, dls, load_PH)
+# 
+path_to_gating_weights = get_path_to_gating_weights(args)
+if load_gating_weights and os.path.exists(path_to_gating_weights):
+    with open(
+        path_to_gating_weights,"rb",
+    ) as file:
+        gating_weights = pickle.load(file)
+else:
+    gating_weights, best_intermediate_gating_weights = (
+        train_gating_weights_based_on_MI_double(
+            model,args,dls,
+            temp_sched_patience=args.gate_patience,))
+# 
+# 
+prune_and_evaluate_model(model, gating_weights,
+                         args, model_type="Final pruned model", dls=dls)
+# 
+if best_intermediate_gating_weights is not None:
+    prune_and_evaluate_model(model, best_intermediate_gating_weights,
+                             args, model_type="Best pruned model", dls=dls)
