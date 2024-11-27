@@ -72,7 +72,7 @@ def init_config():
     parser.add_argument("--max_gate_epochs", default=200, type=int)
     parser.add_argument("--gate_patience", default=5, type=int)
     parser.add_argument("--stopping_criterion", default="min_temperature")
-    parser.add_argument("--ver", default="work")
+    parser.add_argument("--ver", default="ECCV24")
     args = parser.parse_args()
     if args.dataset == "MultiColorMNIST":
         args.nb_bias = 2
